@@ -1,3 +1,4 @@
+print("新年快乐！！！")
 print("再来一次好不好？")
 print("这一次我们又来了")
 print("Hello MyFirstBot")
