@@ -4,10 +4,21 @@ from telegram.ext import MessageHandler, Filters
 import os
 
 def start(update, context):
-    context.bot.send_message(chat_id=update.effective_chat.id, text="I'm a bot, please talk to me!")
+    print(update)
+    msg = "%s你好，你在%s说话"%(
+        update.message.from_user.first_name,
+        update.message.chat.type
+    )
+    context.bot.send_message(chat_id=update.effective_chat.id, text=msg)
 
 def echo(update, context):
-    context.bot.send_message(chat_id=update.effective_chat.id, text=update.message.text)
+    print(update)
+    print(update.message.from_user.first_name)
+    msg = "%s 说了 %s ，你的uid是%s，你说的语言是%s"%(
+        update.message.from_user.first_name,
+        update.message.text,update.message.from_user.id,
+        update.message.from_user.language_code)
+    context.bot.send_message(chat_id=update.effective_chat.id, text=msg)
 
 def read_file_as_str(file_path):
     # 判断路径文件存在
