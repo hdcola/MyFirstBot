@@ -1,53 +1,105 @@
+// 发送a给bot
+
 {
-    'update_id': 199630749, 
-    'message': {
-        'message_id': 1506, 
-        'date': 1599319433, 
-        'chat': {
-            'id': 465307161, 
-            'type': 'private', 
-            'username': 'M36Fxkdx8ibp', 
-            'first_name': '老房东'
-        }, 
-        'text': 'a', 
-        'entities': [], 
-        'caption_entities': [], 
-        'photo': [], 
-        'new_chat_members': [], 
-        'new_chat_photo': [], 
-        'delete_chat_photo': False, 
-        'group_chat_created': False, 
-        'supergroup_chat_created': False, 
-        'channel_chat_created': False, 
-        'from': {
-            'id': 465307161, 
-            'first_name': '老房东', 
-            'is_bot': False, 
-            'username': 'M36Fxkdx8ibp', 
-            'language_code': 'zh-hans'
-        }
-    }
+	'update_id': 199630986,
+	'message': {
+		'message_id': 1840,
+		'date': 1599831730,
+		'chat': {
+			'id': 460000000,
+			'type': 'private',
+			'username': 'xxxxxx',
+			'first_name': '老房东'
+		},
+		'text': 'a',
+		'entities': [],
+		'caption_entities': [],
+		'photo': [],
+		'new_chat_members': [],
+		'new_chat_photo': [],
+		'delete_chat_photo': False,
+		'group_chat_created': False,
+		'supergroup_chat_created': False,
+		'channel_chat_created': False,
+		'from': {
+			'id': 460000000,
+			'first_name': '老房东',
+			'is_bot': False,
+			'username': 'xxxxxx',
+			'language_code': 'zh-hans'
+		}
+	}
 }
 
 
+// 发送/start给bot
 
-{'update_id': 199630759, 
-    'message': {
-        'message_id': 1423, 
-        'date': 1599321820, 
-        'chat': {
-            'id': -1001366387264, 
-            'type': 'supergroup', 
-            'title': 'BotTests'
-        }, 
-        'text': '/start@hddevbot', 
-        'entities': [
-            {
-                'type': 'bot_command', 
-                'offset': 0, 
-                'length': 15
-            }
-        ], 'caption_entities': [], 'photo': [], 'new_chat_members': [], 'new_chat_photo': [], 'delete_chat_photo': False, 'group_chat_created': False, 'supergroup_chat_created': False, 'channel_chat_created': False, 'from': {'id': 465307161, 'first_name': '老房东', 'is_bot': False, 'username': 'M36Fxkdx8ibp', 'language_code': 'zh-hans'
-        }
-    }
+{
+	'update_id': 199630987,
+	'message': {
+		'message_id': 1842,
+		'date': 1599835287,
+		'chat': {
+			'id': 460000000,
+			'type': 'private',
+			'username': 'xxxxxx',
+			'first_name': '老房东'
+		},
+		'text': '/start',
+		'entities': [{
+			'type': 'bot_command',
+			'offset': 0,
+			'length': 6
+		}],
+		'caption_entities': [],
+		'photo': [],
+		'new_chat_members': [],
+		'new_chat_photo': [],
+		'delete_chat_photo': False,
+		'group_chat_created': False,
+		'supergroup_chat_created': False,
+		'channel_chat_created': False,
+		'from': {
+			'id': 460000000,
+			'first_name': '老房东',
+			'is_bot': False,
+			'username': 'xxxxxx',
+			'language_code': 'zh-hans'
+		}
+	}
+}
+
+// 在群组里给bot发送一个/start
+{
+	'update_id': 199630988,
+	'message': {
+		'message_id': 1487,
+		'date': 1599835850,
+		'chat': {
+			'id': -100460000000,
+			'type': 'supergroup',
+			'title': 'BotTests'
+		},
+		'text': '/start@hddevbot',
+		'entities': [{
+			'type': 'bot_command',
+			'offset': 0,
+			'length': 15
+		}],
+		'caption_entities': [],
+		'photo': [],
+		'new_chat_members': [],
+		'new_chat_photo': [],
+		'delete_chat_photo': False,
+		'group_chat_created': False,
+		'supergroup_chat_created': False,
+		'channel_chat_created': False,
+		'from': {
+			'id': 460000000,
+			'first_name': '老房东',
+			'is_bot': False,
+			'username': 'xxxxxx',
+			'language_code': 'zh-hans'
+		}
+	}
 }
