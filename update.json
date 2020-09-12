@@ -1,0 +1,53 @@
+{
+    'update_id': 199630749, 
+    'message': {
+        'message_id': 1506, 
+        'date': 1599319433, 
+        'chat': {
+            'id': 465307161, 
+            'type': 'private', 
+            'username': 'M36Fxkdx8ibp', 
+            'first_name': '老房东'
+        }, 
+        'text': 'a', 
+        'entities': [], 
+        'caption_entities': [], 
+        'photo': [], 
+        'new_chat_members': [], 
+        'new_chat_photo': [], 
+        'delete_chat_photo': False, 
+        'group_chat_created': False, 
+        'supergroup_chat_created': False, 
+        'channel_chat_created': False, 
+        'from': {
+            'id': 465307161, 
+            'first_name': '老房东', 
+            'is_bot': False, 
+            'username': 'M36Fxkdx8ibp', 
+            'language_code': 'zh-hans'
+        }
+    }
+}
+
+
+
+{'update_id': 199630759, 
+    'message': {
+        'message_id': 1423, 
+        'date': 1599321820, 
+        'chat': {
+            'id': -1001366387264, 
+            'type': 'supergroup', 
+            'title': 'BotTests'
+        }, 
+        'text': '/start@hddevbot', 
+        'entities': [
+            {
+                'type': 'bot_command', 
+                'offset': 0, 
+                'length': 15
+            }
+        ], 'caption_entities': [], 'photo': [], 'new_chat_members': [], 'new_chat_photo': [], 'delete_chat_photo': False, 'group_chat_created': False, 'supergroup_chat_created': False, 'channel_chat_created': False, 'from': {'id': 465307161, 'first_name': '老房东', 'is_bot': False, 'username': 'M36Fxkdx8ibp', 'language_code': 'zh-hans'
+        }
+    }
+}
