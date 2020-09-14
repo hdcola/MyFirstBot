@@ -2,6 +2,7 @@ from telegram.ext import Updater
 from telegram.ext import CommandHandler
 from telegram.ext import MessageHandler, Filters
 import os
+import rewards
 
 def start(update, context):
     print(update)
@@ -34,6 +35,8 @@ TOKEN=read_file_as_str('TOKEN')
 
 updater = Updater(token=TOKEN, use_context=True)
 dispatcher = updater.dispatcher
+
+rewards.add_handler(dispatcher)
 
 start_handler = CommandHandler('start', start)
 dispatcher.add_handler(start_handler)
