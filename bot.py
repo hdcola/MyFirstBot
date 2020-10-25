@@ -13,15 +13,6 @@ def start(update, context):
     )
     context.bot.send_message(chat_id=update.effective_chat.id, text=msg)
 
-def echo(update, context):
-    print(update)
-    print(update.message.from_user.first_name)
-    msg = "%s 说了 %s ，你的uid是%s，你说的语言是%s"%(
-        update.message.from_user.first_name,
-        update.message.text,update.message.from_user.id,
-        update.message.from_user.language_code)
-    context.bot.send_message(chat_id=update.effective_chat.id, text=msg)
-
 def read_file_as_str(file_path):
     # 判断路径文件存在
     if not os.path.isfile(file_path):
@@ -42,8 +33,5 @@ guesscmd.add_handler(dispatcher)
 
 start_handler = CommandHandler('start', start)
 dispatcher.add_handler(start_handler)
-
-echo_handler = MessageHandler(Filters.text & (~Filters.command), echo)
-dispatcher.add_handler(echo_handler)
 
 updater.start_polling()
