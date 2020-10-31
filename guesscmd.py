@@ -20,7 +20,7 @@ timer = 0
 #  chatid: {
 #    h:"", 
 #    p:{first_name:d, first_name:x}
-# }}
+# }
 games = {}
 
 def check_chatid(chatid):
