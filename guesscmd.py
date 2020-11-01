@@ -30,6 +30,17 @@ def check_chatid(chatid):
             "p":{}
             }
 
+def getHist(chatid):
+    return games[chatid]['h']
+
+def setHist(chatid,res):
+    h = games[chatid]['h']
+    if len(h) > 10:
+        h = h[:9] + res
+    else:
+        h += res
+    games[chatid]['h'] = h
+
 def getNumber():
     endNumber = 0
     msg = ""
@@ -42,10 +53,11 @@ def getNumber():
 
 def sumGame(chatid):
     number,msg = getNumber()
-    game = 'x'
     users = games[chatid]["p"]
+    game = 'x'
     if number >= 11:
         game = 'd'
+    setHist(chatid,game)
     for u in users.keys():
         if users[u] == '':
             users[u] = '没选'
@@ -76,16 +88,17 @@ def buttonCallback(update, context):
     check_chatid(chatid)
     users = games[chatid]["p"]
     print(f"s:{games}")
+    msg = getUsers(users) + "\n\n" + getHist(chatid)
     if query.data == 'join':
         query.answer("加入游戏")
         users[update.effective_user.first_name] = ""
-        query.edit_message_text(getUsers(users),reply_markup=startkb)
+        query.edit_message_text(msg,reply_markup=startkb)
         return
     elif query.data == 'start':
         timenow = datetime.now()
         if timenow > timer:
             query.answer("开始")
-            query.edit_message_text(getUsers(users),reply_markup=gamekb)
+            query.edit_message_text(msg,reply_markup=gamekb)
             timer = datetime.now()+timedelta(seconds=5)
         else:
             query.answer("冷静！还没到五秒！",show_alert=True)
@@ -94,18 +107,19 @@ def buttonCallback(update, context):
             return
         query.answer("你选择了大")
         users[update.effective_user.first_name] = "d"
-        query.edit_message_text(getUsers(users),reply_markup=gamekb)
+        query.edit_message_text(msg,reply_markup=gamekb)
     elif query.data == 'small':
         if users == {}:
             return
         query.answer("你选择了小")
         users[update.effective_user.first_name] = "x"
-        query.edit_message_text(getUsers(users),reply_markup=gamekb)
+        query.edit_message_text(msg,reply_markup=gamekb)
     elif query.data == 'sum':
         timenow = datetime.now()
         if timenow > timer:
             query.answer("结算开始")
-            query.edit_message_text(sumGame(chatid))
+            msg = sumGame(chatid)+ "\n\n" +getHist(chatid)
+            query.edit_message_text(msg)
             users = {}
         else:
             query.answer("冷静！还没到五秒！",show_alert=True)
