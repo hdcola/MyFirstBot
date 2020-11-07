@@ -2,24 +2,28 @@ from telegram.ext import Dispatcher,CommandHandler,CallbackQueryHandler
 from telegram import InlineKeyboardMarkup,InlineKeyboardButton
 import random
 from datetime import datetime,timedelta
+import coins
 
 smallButton = InlineKeyboardButton('小',callback_data='small')
 bigButton = InlineKeyboardButton('大',callback_data='big')
 sumButton = InlineKeyboardButton('结算',callback_data='sum')
+dailyButton = InlineKeyboardButton('打卡',callback_data='daily')
 
 gamekb = InlineKeyboardMarkup([[bigButton,smallButton,sumButton]])
 
 joinButton = InlineKeyboardButton('加入',callback_data='join')
 startButton = InlineKeyboardButton('开始',callback_data='start')
 
-startkb = InlineKeyboardMarkup([[joinButton,startButton]])
+startkb = InlineKeyboardMarkup([[joinButton,startButton,dailyButton]])
 
 timer = 0
 
 # { 
 #  chatid: {
 #    h:"", 
-#    p:{first_name:d, first_name:x}
+#    p:{
+#       user:d
+#    }
 # }
 games = {}
 
@@ -62,16 +66,23 @@ def sumGame(chatid):
         if users[u] == '':
             users[u] = '没选'
         elif users[u] == game:
-            users[u] = 'Yes!'
+            c = random.randint(0,10)
+            coins.add_coins(chatid,u,c)
+            users[u] = f'Yes! 你赢取了{c}个金币'
+            coins.add_count(chatid,u)
         else:
-            users[u] = 'Noo!'
+            c = random.randint(0,10) * -1
+            coins.add_coins(chatid,u,c)
+            users[u] = f'Noo!你输掉了{c}个金币'
+            coins.add_count(chatid,u)
     msg += "\n%s"%getUsers(users)
     return msg 
 
 def getUsers(users):
     msg = ""
     for u in users.keys():
-        msg += "%s:%s\n"%(u,users[u])
+        print(u)
+        msg += "%s:%s\n"%(u.first_name,users[u])
     return msg
 
 def guess(update, context):
@@ -85,15 +96,22 @@ def buttonCallback(update, context):
     global games,timer
     query = update.callback_query 
     chatid = update.effective_chat.id
+    user = update.effective_user
     check_chatid(chatid)
     users = games[chatid]["p"]
     print(f"s:{games}")
     msg = getUsers(users) + "\n\n" + getHist(chatid)
     if query.data == 'join':
         query.answer("加入游戏")
-        users[update.effective_user.first_name] = ""
+        users[update.effective_user] = ""
         query.edit_message_text(msg,reply_markup=startkb)
         return
+    elif query.data == "daily":
+        c = coins.daily(chatid,user)
+        if c == 0:
+            query.answer("别着急，每五分钟只能打一次卡",show_alert=True)
+        else:
+            query.answer(f"打卡成功，你得到了{c}个金币",show_alert=True)
     elif query.data == 'start':
         timenow = datetime.now()
         if timenow > timer:
@@ -106,13 +124,13 @@ def buttonCallback(update, context):
         if users == {}:
             return
         query.answer("你选择了大")
-        users[update.effective_user.first_name] = "d"
+        users[update.effective_user] = "d"
         query.edit_message_text(msg,reply_markup=gamekb)
     elif query.data == 'small':
         if users == {}:
             return
         query.answer("你选择了小")
-        users[update.effective_user.first_name] = "x"
+        users[update.effective_user] = "x"
         query.edit_message_text(msg,reply_markup=gamekb)
     elif query.data == 'sum':
         timenow = datetime.now()
@@ -127,6 +145,5 @@ def buttonCallback(update, context):
     print(f"e:{games}")
 
 def add_handler(dp:Dispatcher):
-    guess_handler = CommandHandler('guess', guess)
-    dp.add_handler(guess_handler)
+    dp.add_handler(CommandHandler('guess', guess))
     dp.add_handler(CallbackQueryHandler(buttonCallback))

@@ -3,7 +3,7 @@ from telegram.ext import CommandHandler
 from telegram.ext import MessageHandler, Filters
 import os
 import rewards
-import guesscmd
+import guesscmd,coins
 
 def start(update, context):
     print(update)
@@ -30,6 +30,7 @@ dispatcher = updater.dispatcher
 
 rewards.add_handler(dispatcher)
 guesscmd.add_handler(dispatcher)
+coins.add_handler(dispatcher)
 
 start_handler = CommandHandler('start', start)
 dispatcher.add_handler(start_handler)
