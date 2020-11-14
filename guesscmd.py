@@ -1,5 +1,5 @@
 from telegram.ext import Dispatcher,CommandHandler,CallbackQueryHandler
-from telegram import InlineKeyboardMarkup,InlineKeyboardButton
+from telegram import InlineKeyboardMarkup,InlineKeyboardButton,BotCommand
 import random
 from datetime import datetime,timedelta
 import coins
@@ -147,3 +147,6 @@ def buttonCallback(update, context):
 def add_handler(dp:Dispatcher):
     dp.add_handler(CommandHandler('guess', guess))
     dp.add_handler(CallbackQueryHandler(buttonCallback))
+
+def get_command():
+    return [BotCommand('guess','试试你的人生运气吧')]

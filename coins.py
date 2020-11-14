@@ -1,6 +1,7 @@
 import random
 from datetime import datetime,timedelta
 from telegram.ext import Dispatcher,CommandHandler
+from telegram import BotCommand
 
 # {
 #     chatid: {
@@ -58,3 +59,6 @@ def get_coins(update, context):
 
 def add_handler(dp:Dispatcher):
     dp.add_handler(CommandHandler('coins', get_coins))
+
+def get_command():
+    return [BotCommand('coins','看看你的金币有没有丢失')]
