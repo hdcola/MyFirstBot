@@ -70,7 +70,7 @@ def daily(chatid,user):
         return 0
 
 def get_coins(update, context):
-    chatid = update.effective_chat.id
+    chatid = str(update.effective_chat.id)
     user = update.effective_user
     check_user(chatid,user)
     update.message.reply_text(f"{show_user(chatid,user)}")
