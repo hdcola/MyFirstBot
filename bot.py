@@ -2,7 +2,7 @@ from telegram.ext import Updater,MessageHandler, Filters,CommandHandler
 from telegram import BotCommand
 import os
 import rewards
-import guesscmd,coins
+import guesscmd,coins,votecmd
 
 def start(update, context):
     print(update)
@@ -30,8 +30,9 @@ dispatcher = updater.dispatcher
 rewards.add_handler(dispatcher)
 guesscmd.add_handler(dispatcher)
 coins.add_handler(dispatcher)
+votecmd.add_handler(dispatcher)
 
-commands = rewards.get_command() + guesscmd.get_command() +  coins.get_command()
+commands = rewards.get_command() + guesscmd.get_command() +  coins.get_command() + votecmd.get_command()
 bot = updater.bot
 bot.set_my_commands(commands)
 

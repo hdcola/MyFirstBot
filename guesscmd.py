@@ -4,15 +4,15 @@ import random
 from datetime import datetime,timedelta
 import coins
 
-smallButton = InlineKeyboardButton('小',callback_data='small')
-bigButton = InlineKeyboardButton('大',callback_data='big')
-sumButton = InlineKeyboardButton('结算',callback_data='sum')
-dailyButton = InlineKeyboardButton('打卡',callback_data='daily')
+smallButton = InlineKeyboardButton('小',callback_data='guess:small')
+bigButton = InlineKeyboardButton('大',callback_data='guess:big')
+sumButton = InlineKeyboardButton('结算',callback_data='guess:sum')
+dailyButton = InlineKeyboardButton('打卡',callback_data='guess:daily')
 
 gamekb = InlineKeyboardMarkup([[bigButton,smallButton,sumButton]])
 
-joinButton = InlineKeyboardButton('加入',callback_data='join')
-startButton = InlineKeyboardButton('开始',callback_data='start')
+joinButton = InlineKeyboardButton('加入',callback_data='guess:join')
+startButton = InlineKeyboardButton('开始',callback_data='guess:start')
 
 startkb = InlineKeyboardMarkup([[joinButton,startButton,dailyButton]])
 
@@ -148,7 +148,7 @@ def buttonCallback(update, context):
 
 def add_handler(dp:Dispatcher):
     dp.add_handler(CommandHandler('guess', guess))
-    dp.add_handler(CallbackQueryHandler(buttonCallback))
+    dp.add_handler(CallbackQueryHandler(buttonCallback,pattern="^guess:[A-Za-z0-9_]*"))
 
 def get_command():
     return [BotCommand('guess','试试你的人生运气吧')]
