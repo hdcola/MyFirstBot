@@ -73,7 +73,8 @@ def get_coins(update, context):
     chatid = str(update.effective_chat.id)
     user = update.effective_user
     check_user(chatid,user)
-    update.message.reply_text(f"{show_user(chatid,user)}")
+    # update.message.reply_text(f"{show_user(chatid,user)}")
+    update.message.reply_animation('https://5b0988e595225.cdn.sohucs.com/images/20190320/8fd8429c05784afebc378c04f1ac8005.gif',caption=f"{show_user(chatid,user)}")
 
 def add_handler(dp:Dispatcher):
     dp.add_handler(CommandHandler('coins', get_coins))

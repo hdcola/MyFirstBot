@@ -90,7 +90,8 @@ def guess(update, context):
     chatid = update.effective_chat.id
     check_chatid(chatid)
     timer = datetime.now() + timedelta(seconds=5)
-    update.message.reply_text("请选择大或小",reply_markup=startkb)
+    update.message.reply_animation('https://p1.pstatp.com/large/3a040003070819614323',caption='请选择大或小',reply_markup=startkb)
+    # update.message.reply_text("请选择大或小",reply_markup=startkb)
 
 def buttonCallback(update, context):
     global games,timer
@@ -104,7 +105,8 @@ def buttonCallback(update, context):
     if query.data == 'join':
         query.answer("加入游戏")
         users[update.effective_user] = ""
-        query.edit_message_text(msg,reply_markup=startkb)
+        query.edit_message_caption(msg,reply_markup=startkb)
+        query.edit_message_media(media=None)
         return
     elif query.data == "daily":
         c = coins.daily(chatid,user)
@@ -116,7 +118,7 @@ def buttonCallback(update, context):
         timenow = datetime.now()
         if timenow > timer:
             query.answer("开始")
-            query.edit_message_text(msg,reply_markup=gamekb)
+            query.edit_message_caption(msg,reply_markup=gamekb)
             timer = datetime.now()+timedelta(seconds=5)
         else:
             query.answer("冷静！还没到五秒！",show_alert=True)
@@ -125,19 +127,19 @@ def buttonCallback(update, context):
             return
         query.answer("你选择了大")
         users[update.effective_user] = "d"
-        query.edit_message_text(msg,reply_markup=gamekb)
+        query.edit_message_caption(msg,reply_markup=gamekb)
     elif query.data == 'small':
         if users == {}:
             return
         query.answer("你选择了小")
         users[update.effective_user] = "x"
-        query.edit_message_text(msg,reply_markup=gamekb)
+        query.edit_message_caption(msg,reply_markup=gamekb)
     elif query.data == 'sum':
         timenow = datetime.now()
         if timenow > timer:
             query.answer("结算开始")
             msg = sumGame(chatid)+ "\n\n" +getHist(chatid)
-            query.edit_message_text(msg)
+            query.edit_message_caption(msg)
             users = {}
         else:
             query.answer("冷静！还没到五秒！",show_alert=True)
