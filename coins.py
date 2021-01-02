@@ -1,7 +1,7 @@
 import random
 from datetime import datetime,timedelta
 from telegram.ext import Dispatcher,CommandHandler
-from telegram import BotCommand
+from telegram import BotCommand,Animation
 import config
 
 # {
@@ -74,10 +74,17 @@ def get_coins(update, context):
     user = update.effective_user
     check_user(chatid,user)
     # update.message.reply_text(f"{show_user(chatid,user)}")
-    update.message.reply_animation('https://5b0988e595225.cdn.sohucs.com/images/20190320/8fd8429c05784afebc378c04f1ac8005.gif',caption=f"{show_user(chatid,user)}")
+    # animation = Animation("CgACAgQAAxkBAAIDyV_nTEFiW6mSETEva1-BHyzrvoUZAAKMAgACMOjNUcDOFn3dhaOpHgQ","AgADjAIAAjDozVE",240,320,7)
+    animation = Animation("CgACAgQAAxkBAAIEDF_nZ0bJkjLEE2jhuW_2wuPqqCWSAAJAAgACHnvNUQ_zyBdwQ5YLHgQ","AgADQAIAAh57zVE",320,180,3)
+    update.message.reply_animation(animation ,caption=f"{show_user(chatid,user)}")
+    # update.message.reply_animation('https://5b0988e595225.cdn.sohucs.com/images/20190320/8fd8429c05784afebc378c04f1ac8005.gif',caption=f"{show_user(chatid,user)}")
 
 def add_handler(dp:Dispatcher):
     dp.add_handler(CommandHandler('coins', get_coins))
 
 def get_command():
     return [BotCommand('coins','看看你的金币有没有丢失')]
+
+
+if __name__ == '__main__':
+    pass

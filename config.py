@@ -1,4 +1,5 @@
 import json
+import os
 
 def load_config():
     global CONFIG
@@ -13,6 +14,8 @@ def save_config():
 config_file = 'my.json'
 
 CONFIG = {}
+
+RUN_PATH = os.getcwd()
 
 load_config()
 
