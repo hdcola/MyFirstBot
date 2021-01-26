@@ -2,7 +2,7 @@ from telegram.ext import Updater,MessageHandler, Filters,CommandHandler
 from telegram import BotCommand
 import os
 import rewards
-import guesscmd,coins,votecmd,info,youtubemusic,mycal
+import guesscmd,coins,votecmd,info,youtubemusic,mycal,mygame
 
 def start(update, context):
     print(update)
@@ -35,6 +35,7 @@ info.add_dispatcher(dispatcher)
 youtubemusic.add_handler(dispatcher)
 mycal.add_dispatcher(dispatcher)
 mycal.run_repeating(updater.job_queue)
+mygame.add_handler(dispatcher)
 
 commands = rewards.get_command() + guesscmd.get_command() +  coins.get_command() + votecmd.get_command()
 bot = updater.bot
