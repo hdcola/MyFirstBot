@@ -21,3 +21,5 @@ load_config()
 
 if not "coins" in CONFIG:
     CONFIG["coins"] = {}
+if not "cs" in CONFIG:
+    CONFIG["cs"] = {}
