@@ -83,7 +83,15 @@ def view_cal(update,context):
         msg += f"✨ {cs[chatid]['title']}\n📆 Calendar URL: {cs[chatid]['url']}\n🔔 Notification Time: {cs[chatid]['hours']}:{minutes}\n\n"
     update.message.reply_text(msg)
 
+def show_job(update,context):
+    msg = 'b\n'
+    jobs = context.job_queue.jobs()
+    for j in jobs:
+        msg += f'{j.name} {j.next_t}\n'
+    update.message.reply_text(msg)
+
 def add_dispatcher(dp: Dispatcher):
     dp.add_handler(CommandHandler(["cal"], cal))
     dp.add_handler(CommandHandler('setcal', calhelp))
     dp.add_handler(CommandHandler('showcal', view_cal))
+    dp.add_handler(CommandHandler('showjob', show_job))
